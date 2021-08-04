@@ -29,5 +29,4 @@ namespace bes {
     };
 };
 
-
 #endif

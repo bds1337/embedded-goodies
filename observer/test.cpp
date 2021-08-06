@@ -2,20 +2,11 @@
 
 #include "observer.hpp"
 
-struct Button
-{
-    enum {
-        pressed = 0,
-        released
-    };
-    int state;
-};
-
-class Event_Handler1 {
-
-};
-
 
 int main() {
+    //bes::Subject test;
+    // this shit gonna leak xD
+    bes::Subject *sub = new bes::Subject;
+    delete sub;
     return 0;
 }

@@ -21,12 +21,13 @@ struct queue
     int (*remove) (queue_t* q);
 };
 
-void queue_init(queue_t * q,
-                int (*module_is_full) (queue_t* q),
-                int (*module_is_empty) (queue_t* q),
-                int (*module_get_size) (queue_t* q),
-                void (*module_put) (queue_t* q, char byte),
-                int (*module_remove) (queue_t* q)
+// конструктор
+void queue_init(queue_t * q
+                , int (*module_is_full) (queue_t* q)
+                , int (*module_is_empty) (queue_t* q)
+                , int (*module_get_size) (queue_t* q)
+                , void (*module_put) (queue_t* q, char byte)
+                , int (*module_remove) (queue_t* q)
                 )
 {
     if (q == NULL)
@@ -42,6 +43,13 @@ void queue_init(queue_t * q,
     q->remove = module_remove;
 }
 
+// деструктор
+void queue_cleanup(queue_t * q)
+{
+
+}
+
+// методы
 void queue_destroy(queue_t * q)
 {
     if (q == NULL)
@@ -49,7 +57,6 @@ void queue_destroy(queue_t * q)
     free(q);
 }
 
-// methods
 int queue_is_full(queue_t * q)
 {
     return (q->head+1) % QUEUE_MAX == q->tail;
@@ -87,7 +94,7 @@ int queue_remove(queue_t * q)
 
 queue_t* queue_create(void)
 {
-    queue_t * q = malloc(sizeof(queue_t));
+    queue_t * q = (queue_t *)malloc(sizeof(queue_t));
     if (q != NULL) 
         queue_init(q, queue_is_full, queue_is_empty,
                     queue_get_size, queue_put, queue_remove);

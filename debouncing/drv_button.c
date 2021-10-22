@@ -46,5 +46,6 @@ drv_button_t * drv_button_create(struct timer_t* time,
 
 void drv_button_recv_event(drv_button_t *btn) 
 {
+    printf("Button state %c\n", btn->state);
 
 }
